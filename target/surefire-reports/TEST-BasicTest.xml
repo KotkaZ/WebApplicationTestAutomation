@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="BasicTest" time="12.924" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="BasicTest" time="10.61" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2020.3.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,7 +64,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="BasicTest" name="titleExistsTest" time="3.48"/>
-  <testcase classname="BasicTest" name="loginFalsePassword" time="2.969"/>
-  <testcase classname="BasicTest" name="loginLogoutTest" time="6.475"/>
+  <testcase classname="BasicTest" name="titleExistsTest" time="3.285"/>
+  <testcase classname="BasicTest" name="loginFalsePassword" time="3.104"/>
+  <testcase classname="BasicTest" name="loginLogoutTest" time="4.221"/>
 </testsuite>
