@@ -25,7 +25,7 @@ public class BasicTest extends TestHelper {
     Fill in loginLogoutTest() and login mehtod in TestHelper, so that the test passes correctly.
 
      */
-    // @Test
+    @Test
     public void loginLogoutTest(){
 
         login(username, password);
@@ -45,9 +45,10 @@ public class BasicTest extends TestHelper {
      Write a test case, where you make sure, that one can’t log in with a false password
 
      */
-    // @Test
+    @Test
     public void loginFalsePassword() {
 
     }
+
 
 }
