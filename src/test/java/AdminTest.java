@@ -39,9 +39,13 @@ public class AdminTest extends TestHelper  {
         driver.findElement(By.id("product_price")).sendKeys("20");
 
         driver.findElement(By.name("commit")).click();
-        driver.findElement(By.id("testItem")).findElement(By.linkText("Delete")).click();
 
-        assertFalse(driver.findElements(By.id("testItem")).size() > 0);
+        try {
+            assertTrue(driver.findElement(By.id("testItem")).findElements(By.linkText("testItem")).size() > 0);
+        } finally {
+            driver.findElement(By.id("testItem")).findElement(By.linkText("Delete")).click();
+            assertFalse(driver.findElements(By.id("testItem")).size() > 0);
+        }
 
     }
 
@@ -180,6 +184,70 @@ public class AdminTest extends TestHelper  {
         driver.findElement(By.id("testItem")).findElement(By.linkText("Delete")).click();
 
         assertFalse(driver.findElements(By.id("testItem")).size() > 0);
+
+    }
+
+    @Test
+    public void canNotRegisterWithNameThatExists() {
+        driver.get(baseUrlAdmin);
+        driver.findElement(By.xpath("/html/body/div[2]/div/ul/li[3]/a")).click();
+        driver.findElement(By.linkText("Register")).click();
+        driver.findElement(By.id("user_name")).sendKeys("admin2");
+        driver.findElement(By.id("user_password")).sendKeys("admin2");
+        driver.findElement(By.id("user_password_confirmation")).sendKeys("admin2");
+        driver.findElement(By.name("commit")).click();
+        try {
+            assertEquals("Name has already been taken", driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/form/div[1]/ul/li")).getText());
+        } finally {
+            driver.get("https://powerful-taiga-62172.herokuapp.com/login");
+            driver.findElement(By.id("name")).sendKeys("admin2");
+            driver.findElement(By.id("password")).sendKeys("admin2");
+            driver.findElement(By.xpath("//input[@value='Login']")).click();
+        }
+    }
+
+    @Test
+    public void canNotAddProductWithTitleThatExists() {
+        driver.findElement(By.linkText("New product")).click();
+
+        driver.findElement(By.id("product_title")).sendKeys("testItem");
+        driver.findElement(By.id("product_description")).sendKeys("testItem desc");
+        Select type = new Select(driver.findElement(By.id("product_prod_type")));
+        type.selectByValue("Books");
+        driver.findElement(By.id("product_price")).sendKeys("20");
+
+        driver.findElement(By.name("commit")).click();
+
+        driver.findElement(By.linkText("New product")).click();
+
+        driver.findElement(By.id("product_title")).sendKeys("testItem");
+        driver.findElement(By.id("product_description")).sendKeys("testItem desc2");
+        Select type2 = new Select(driver.findElement(By.id("product_prod_type")));
+        type2.selectByValue("Sunglasses");
+        driver.findElement(By.id("product_price")).sendKeys("24");
+
+        driver.findElement(By.name("commit")).click();
+
+        try {
+            assertEquals("Title has already been taken", driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/form/div[1]/ul/li")).getText());
+        } finally {
+            driver.get("https://powerful-taiga-62172.herokuapp.com/products");
+            driver.findElement(By.id("testItem")).findElement(By.linkText("Delete")).click();
+        }
+    }
+
+    @Test
+    public void canNotAddProductWithoutTitle() {
+        driver.findElement(By.linkText("New product")).click();
+
+        driver.findElement(By.id("product_description")).sendKeys("testItem desc");
+        Select type = new Select(driver.findElement(By.id("product_prod_type")));
+        type.selectByValue("Books");
+        driver.findElement(By.id("product_price")).sendKeys("20");
+
+        driver.findElement(By.name("commit")).click();
+
+        assertEquals("Title can't be blank", driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/form/div[1]/ul/li")).getText());
 
     }
 
