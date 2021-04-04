@@ -38,6 +38,14 @@ public class UserTest extends TestHelper {
         List<WebElement> buttons = cartItem.findElements(By.cssSelector("a"));
         buttons.get(1).click();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        cartItem = driver.findElement(By.className("cart_row"));
+        amount = cartItem.findElement(By.cssSelector("td"));
+
         assertEquals("2×", amount.getText());
 
         buttons = cartItem.findElements(By.cssSelector("a"));
@@ -89,7 +97,7 @@ public class UserTest extends TestHelper {
         driver.findElement(By.id("search_input")).sendKeys("WRONG INTPUT");
 
         List<WebElement> products = driver.findElements(By.className("entry"));
-        assertTrue(products.isEmpty());
+        products.forEach(p -> assertEquals("none", p.getCssValue("display")));
     }
 
     @Test
