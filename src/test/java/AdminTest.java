@@ -93,7 +93,8 @@ public class AdminTest extends TestHelper  {
 
         driver.findElement(By.id("testItem")).findElement(By.linkText("Edit")).click();
 
-        driver.findElement(By.id("product_title")).sendKeys(Keys.chord(Keys.CONTROL, "a"), "testItemEdited");
+        driver.findElement(By.id("product_title")).clear();
+        driver.findElement(By.id("product_title")).sendKeys("testItemEdited");
 
         driver.findElement(By.name("commit")).click();
         driver.findElement(By.linkText("Back")).click();
@@ -123,7 +124,9 @@ public class AdminTest extends TestHelper  {
 
         driver.findElement(By.id("testItem")).findElement(By.linkText("Edit")).click();
 
-        driver.findElement(By.id("product_description")).sendKeys(Keys.chord(Keys.CONTROL, "a"), "testItem desc Edited");
+        driver.findElement(By.id("product_description")).clear();
+        driver.findElement(By.id("product_description")).sendKeys("testItem desc Edited");
+
 
         driver.findElement(By.name("commit")).click();
         driver.findElement(By.linkText("Back")).click();
@@ -153,7 +156,9 @@ public class AdminTest extends TestHelper  {
 
         driver.findElement(By.id("testItem")).findElement(By.linkText("Edit")).click();
 
-        driver.findElement(By.id("product_price")).sendKeys(Keys.chord(Keys.CONTROL, "a"), "22");
+        driver.findElement(By.id("product_price")).clear();
+        driver.findElement(By.id("product_price")).sendKeys("22");
+
 
         driver.findElement(By.name("commit")).click();
         driver.findElement(By.linkText("Back")).click();
