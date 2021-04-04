@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -47,7 +48,8 @@ public class BasicTest extends TestHelper {
      */
     @Test
     public void loginFalsePassword() {
-
+        login(username, "Wrong password");
+        Assert.assertEquals("Invalid user/password combination", driver.findElement(By.id("notice")).getText());
     }
 
 
