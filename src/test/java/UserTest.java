@@ -20,7 +20,6 @@ public class UserTest extends TestHelper {
     @Test
     public void addToCart() {
         driver.findElements(By.xpath("//input[@value='Add to Cart']")).get(0).click();
-        ;
 
         List<WebElement> cartItems = driver.findElements(By.className("cart_row"));
         assertEquals(1, cartItems.size());
@@ -50,7 +49,6 @@ public class UserTest extends TestHelper {
     public void deleteOneByOne() {
 
         driver.findElements(By.xpath("//input[@value='Add to Cart']")).get(0).click();
-        ;
 
         List<WebElement> cartItems = driver.findElements(By.className("cart_row"));
         assertEquals(1, cartItems.size());
@@ -65,7 +63,6 @@ public class UserTest extends TestHelper {
     public void deleteEntireCart() {
 
         driver.findElements(By.xpath("//input[@value='Add to Cart']")).get(0).click();
-        ;
 
         List<WebElement> cartItems = driver.findElements(By.className("cart_row"));
         assertEquals(1, cartItems.size());
@@ -77,16 +74,28 @@ public class UserTest extends TestHelper {
     }
 
     @Test
-    public void searchAndFilter() {
+    public void searchViaKeyword() {
 
         driver.findElement(By.id("search_input")).sendKeys("B45593 Sunglasses");
 
         List<WebElement> products = driver.findElements(By.className("entry"));
         assertFalse(products.isEmpty());
         assertEquals("B45593 Sunglasses", products.get(0).findElement(By.cssSelector("h3")).getText());
+    }
 
+    @Test
+    public void searchViaWrongKeyword() {
+
+        driver.findElement(By.id("search_input")).sendKeys("WRONG INTPUT");
+
+        List<WebElement> products = driver.findElements(By.className("entry"));
+        assertTrue(products.isEmpty());
+    }
+
+    @Test
+    public void filterItems() {
         driver.findElement(By.linkText("Sunglasses")).click();
-        products = driver.findElements(By.className("entry"));
+        List<WebElement> products = driver.findElements(By.className("entry"));
         products.forEach(v -> assertTrue(v.findElement(By.id("category"))
                 .findElement(By.cssSelector("strong"))
                 .getText()
@@ -105,7 +114,6 @@ public class UserTest extends TestHelper {
             String category = v.findElement(By.id("category")).findElement(By.cssSelector("strong")).getText();
             assertTrue(!category.contains("Sunglasses") && !category.contains("Books"));
         });
-
     }
 
     @Test
