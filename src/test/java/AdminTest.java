@@ -257,11 +257,6 @@ public class AdminTest extends TestHelper  {
 
     }
 
-    @Test
-    public void loginFalsePassword() {
-        login("admin", "Wrong password");
-        Assert.assertEquals("Invalid user/password combination", driver.findElement(By.id("notice")).getText());
-    }
 
     @After
     public void after() {

@@ -41,5 +41,10 @@ public class BasicTest extends TestHelper {
     }
 
 
+    @Test
+    public void loginFalsePassword() {
+        login("admin", "Wrong password");
+        Assert.assertEquals("Invalid user/password combination", driver.findElement(By.id("notice")).getText());
+    }
 
 }
