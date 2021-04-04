@@ -40,17 +40,6 @@ public class BasicTest extends TestHelper {
         logout();
     }
 
-    /*
-    In class Exercise
-
-     Write a test case, where you make sure, that one can’t log in with a false password
-
-     */
-    @Test
-    public void loginFalsePassword() {
-        login(username, "Wrong password");
-        Assert.assertEquals("Invalid user/password combination", driver.findElement(By.id("notice")).getText());
-    }
 
 
 }

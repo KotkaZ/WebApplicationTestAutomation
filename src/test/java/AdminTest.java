@@ -1,5 +1,6 @@
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -256,6 +257,12 @@ public class AdminTest extends TestHelper  {
 
     }
 
+    @Test
+    public void loginFalsePassword() {
+        login("admin", "Wrong password");
+        Assert.assertEquals("Invalid user/password combination", driver.findElement(By.id("notice")).getText());
+    }
+
     @After
     public void after() {
         driver.get(baseUrlAdmin);
@@ -269,6 +276,7 @@ public class AdminTest extends TestHelper  {
         String deleteString = driver.findElement(By.id("notice")).getText();
         assertEquals("User was successfully deleted.", deleteString);
     }
+
 
 
 }
