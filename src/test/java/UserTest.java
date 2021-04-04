@@ -50,6 +50,14 @@ public class UserTest extends TestHelper {
 
         buttons = cartItem.findElements(By.cssSelector("a"));
         buttons.get(0).click();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        cartItem = driver.findElement(By.className("cart_row"));
+        amount = cartItem.findElement(By.cssSelector("td"));
         assertEquals("1×", amount.getText());
     }
 
